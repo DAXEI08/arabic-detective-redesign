@@ -98,6 +98,53 @@ Hasil lokal = sumber utama; cloud = backup. Alur: simpan lokal → masukkan antr
 
 Tiap tugas benar +100 XP (+30 bila tanpa petunjuk); selesai kasus +150; +50 per bintang. Akurasi = tugas benar / (benar + salah). ⭐⭐⭐ bila akurasi ≥ 85% dan petunjuk ≤ 3; ⭐⭐ bila ≥ 60%; selain itu ⭐. XP total = XP terbaik per kasus (replay tidak menurunkan skor terbaik dan tidak bisa digrinding). Peringkat: 0 / 1.500 / 3.500 XP.
 
+## Pengaturan tampilan & aksesibilitas
+
+Halaman **Pengaturan** (`/settings`) punya delapan kategori: Tampilan, Tipografi, Membaca Arab, Tata letak, Gerak, Aksesibilitas, Permainan, Data. Semua perubahan langsung berlaku di seluruh aplikasi (tanpa reload), tersimpan di browser, dan punya pratinjau langsung. "Pulihkan tampilan bawaan" hanya mengembalikan tampilan: siswa, progres, nilai, dan pencapaian tidak tersentuh.
+
+| Kelompok | Pilihan |
+|---|---|
+| Tema | Gelap (bawaan) · Terang · Ikuti sistem. Kertas berkas tetap krem di semua tema. |
+| Aksen | Emas (bawaan) · Ambar · Zamrud · Biru · Merah tua |
+| Sudut | Tajam · Tipis · Membulat (bawaan) · Sangat bulat |
+| Font antarmuka | Inter (bawaan) · Font sistem · IBM Plex Sans · Atkinson Hyperlegible |
+| Font Arab | Noto Naskh Arabic (bawaan) · Amiri · Scheherazade New |
+| Ukuran teks | Kecil 0,9× · Standar · Besar 1,1× · Sangat besar 1,25×; Arab punya skala sendiri (1× / 1,2× / 1,4×) |
+| Jarak baris | Rapat · Nyaman · Longgar (UI dan Arab terpisah) |
+| Arab | Perataan Otomatis / Kanan / Tengah, ketebalan Normal / Tebal |
+| Kerapatan | Rapat (kontrol 40px) · Nyaman (44px) · Lega (48px) |
+| Lebar konten | Sempit 1280px · Standar 1680px · Lebar 2000px (hanya berpengaruh di layar ≥1280px) |
+| Gerak | Ikuti sistem · Penuh · Dikurangi · Tanpa animasi; animasi dekoratif, tekstur kertas, grid latar |
+| Aksesibilitas | Kontras tinggi, fokus keyboard tebal, mode keterbacaan tinggi, kurangi transparansi |
+
+Default sama dengan tampilan sebelumnya. Font tersimpan lokal (`@fontsource`) dan hanya diunduh browser saat dipakai. "Ikuti sistem" pada Gerak memakai `prefers-reduced-motion`; pilihan eksplisit pengguna selalu didahulukan. Penanda status (benar/salah, bukti ditemukan) tetap tampil pada mode tanpa animasi, hanya tanpa gerakan. Mode keterbacaan tinggi tidak pernah memberi `letter-spacing` pada teks Arab (merusak sambungan huruf).
+
+### Arsitektur (tanpa percabangan gaya di komponen)
+
+```
+preferencesStore (zustand, key arabic-detective:v1:prefs)
+      │  sanitizePreferences: nilai tak valid kembali ke default per-key
+      ▼
+theme/apply.ts   preferensi + OS  ──►  atribut data-* pada <html>   (dijalankan sebelum render pertama di main.tsx)
+      ▼
+styles/theme.css + palette.css   atribut data-*  ──►  variabel CSS
+      ▼
+tailwind.config.js   warna, radius, ukuran teks, padding/margin/gap, lebar halaman = var(--…)
+```
+
+- **Warna:** `src/styles/palette.css` dihasilkan oleh `scripts/generate-theme-tokens.py --css`, yang juga memeriksa kontras WCAG untuk tiap kombinasi tema × aksen (115 pemeriksaan). File hasil di-commit; skrip hanya perlu dijalankan saat warna diubah.
+- **`.paper` punya palet sendiri** (tinta navy di atas krem) sehingga tema terang bukan sekadar inversi.
+- **Token semantik:** `--color-bg`, `--color-surface`, `--color-text`, `--color-accent`, `--color-paper`, dan seterusnya; plus `--density`, `--control-height`, `--panel-padding`, `--radius-*`, `--ui-font-scale`, `--ar-scale`, `--content-max`.
+- **Arab:** semua teks Arab lewat komponen `Ar` (`ar-xs … ar-hero`) sehingga font, skala, bobot, dan jarak baris Arab dikendalikan terpusat. Tambahkan `ar-keep` pada blok yang tata letaknya tidak boleh ikut preferensi perataan.
+- **Transparansi:** permukaan semi-transparan memakai kunci alpha semantik (`bg-ink-800/soft`, `/scrim`, `/glass`), yang menjadi solid pada "kurangi transparansi" dan kontras tinggi.
+
+### Menambah preferensi baru
+1. Tambahkan nilainya di `ENUMS`/`Preferences` dan `ATTR_NAMES` (`theme/preferences.ts`).
+2. Tulis aturan CSS `[data-…='nilai']` di `theme.css`.
+3. Tambahkan kontrol di `pages/Settings.tsx`.
+
+Langkah 2 dijaga oleh tes kontrak (`preferences.test.ts`): setiap opsi yang bisa dipilih harus punya aturan CSS, jadi tidak ada pengaturan yang diam-diam tidak berfungsi.
+
 ## Keterbatasan yang diketahui
 
 - Tidak ada service worker: halaman harus dimuat sekali dengan internet; setelah itu gameplay tidak membutuhkan internet. Karena tidak ada service worker, memuat ulang halaman saat benar-benar offline tidak didukung.
