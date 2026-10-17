@@ -34,10 +34,10 @@ export function GridMap({ map, items = [], cellExtra, onCellClick, small, label 
               onKeyDown={(e) => { if (interactive && (e.key === 'Enter' || e.key === ' ') && e.target === e.currentTarget) { e.preventDefault(); onCellClick?.({ col, row }) } }}
               className={`relative aspect-square rounded-md border ${lm ? 'border-ink-500 bg-ink-700' : 'border-ink-700 bg-ink-800/80'} ${interactive ? 'cursor-pointer hover:border-gold-500/70' : ''}`}
             >
-              {!small && <span className="pointer-events-none absolute left-1 top-0.5 z-[1] font-mono text-[9px] text-ink-400" aria-hidden>{String.fromCharCode(65 + col)}{row + 1}</span>}
+              {!small && <span className="pointer-events-none absolute left-1 top-0.5 z-[1] font-mono text-nano text-ink-400" aria-hidden>{String.fromCharCode(65 + col)}{row + 1}</span>}
               {lm && <div className="absolute inset-0 grid place-items-center p-[10%]"><EntityGlyph kind={lm.kind} size={small ? 34 : 56} className="h-full w-full" /></div>}
               {placed.map((p, k) => (
-                <div key={p.kind} className="absolute grid place-items-center rounded-md bg-ink-950/70 ring-1 ring-gold-500"
+                <div key={p.kind} className="absolute grid place-items-center rounded-md bg-ink-950/glass ring-1 ring-gold-500"
                   style={lm ? { right: 2, bottom: 2, width: '48%', height: '48%', zIndex: 2 + k } : { inset: '8%' }}>
                   <EntityGlyph kind={p.kind} className="h-full w-full p-0.5" size={small ? 26 : 44} />
                 </div>
@@ -47,7 +47,7 @@ export function GridMap({ map, items = [], cellExtra, onCellClick, small, label 
           )
         })}
       </div>
-      <p className="mt-1.5 flex items-center justify-center gap-1 text-[11px] text-cream-400" aria-hidden>▼ dermaga · semua bangunan menghadap ke bawah</p>
+      <p className="mt-1.5 flex items-center justify-center gap-1 text-tiny text-cream-400" aria-hidden>▼ dermaga · semua bangunan menghadap ke bawah</p>
     </div>
   )
 }

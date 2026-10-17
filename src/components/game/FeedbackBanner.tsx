@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { RichText } from '../common/RichText'
+import { Ar, RichText } from '../common/RichText'
 
 export interface Feedback { kind: 'good' | 'bad' | 'info'; text: string; key?: number }
 const GOOD = ['أَحْسَنْتَ!', 'مُمْتَازٌ!', 'رَائِعٌ!']
@@ -20,8 +20,8 @@ export function FeedbackBanner({ feedback }: { feedback: Feedback | null }) {
             className={`rounded-lg border border-ink-600 border-l-4 bg-ink-800 px-3 py-2 ${LOOK[feedback.kind].edge}`}>
             <p className={`label ${LOOK[feedback.kind].tag}`}>{LOOK[feedback.kind].label}</p>
             <div className="text-sm leading-relaxed">
-              {feedback.kind === 'good' && <span lang="ar" dir="rtl" className={`ar block text-xl leading-normal ${LOOK.good.text}`}>{GOOD[n++ % GOOD.length]}</span>}
-              {feedback.kind === 'bad' && <span lang="ar" dir="rtl" className={`ar block text-lg leading-normal ${LOOK.bad.text}`}>حَاوِلْ مَرَّةً أُخْرَى</span>}
+              {feedback.kind === 'good' && <Ar size="cue" className={`block leading-normal ${LOOK.good.text}`}>{GOOD[n++ % GOOD.length]}</Ar>}
+              {feedback.kind === 'bad' && <Ar size="sm" className={`block leading-normal ${LOOK.bad.text}`}>حَاوِلْ مَرَّةً أُخْرَى</Ar>}
               <RichText text={feedback.text} />
             </div>
           </motion.div>

@@ -202,7 +202,8 @@ export interface PlayerProfile {
   results: CaseResult[]
 }
 
-export interface Settings { reduceMotion: boolean; demoUnlock: boolean }
+/** Gameplay settings only. Appearance & accessibility live in theme/preferences.ts (preferencesStore). */
+export interface Settings { demoUnlock: boolean }
 
 export interface PersistedState {
   version: 1

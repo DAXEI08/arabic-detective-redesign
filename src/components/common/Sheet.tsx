@@ -20,7 +20,7 @@ export function Sheet({ open, onClose, title, children, footer }: Props) {
     <AnimatePresence>
       {open && (
         <div className="fixed inset-0 z-50 flex items-end justify-end md:items-stretch">
-          <motion.div className="absolute inset-0 bg-ink-950/75" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} aria-hidden />
+          <motion.div className="absolute inset-0 bg-ink-950/scrim-sm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} aria-hidden />
           <motion.div
             ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-label={title}
             className="relative flex outline-none max-h-[88dvh] w-full flex-col rounded-t-xl border border-ink-600 bg-ink-800 md:max-h-none md:w-[440px] md:rounded-none md:border-y-0 md:border-r-0"

@@ -16,7 +16,7 @@ export function Modal({ open, onClose, title, children }: { open: boolean; onClo
     <AnimatePresence>
       {open && (
         <div className="fixed inset-0 z-[60] grid place-items-center p-4">
-          <motion.div className="absolute inset-0 bg-ink-950/85" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} />
+          <motion.div className="absolute inset-0 bg-ink-950/scrim" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose} />
           <motion.div ref={ref} tabIndex={-1} role="dialog" aria-modal="true" aria-label={title}
             className="panel relative max-h-[90dvh] outline-none w-full max-w-md overflow-y-auto p-5" initial={{ y: 8, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}>
             <h2 className="mb-3 border-b border-ink-600 pb-2 text-base font-semibold">{title}</h2>

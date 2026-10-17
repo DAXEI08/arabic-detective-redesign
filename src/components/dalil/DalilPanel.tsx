@@ -91,7 +91,7 @@ export function FieldNotes({ def, task, className = '' }: { def: CaseDefinition;
     <section className={`paper on-paper flex flex-col p-4 ${className}`} aria-label="Catatan lapangan Dalil">
       <header className="flex items-start justify-between gap-3">
         <div>
-          <p lang="ar" className="ar text-2xl leading-none text-gold-700">دَلِيل</p>
+          <Ar size="md" className="ar-keep block leading-none text-gold-700">دَلِيل</Ar>
           <p className="label mt-1">Field notes</p>
         </div>
         <div className="text-right" aria-label={`Tingkat petunjuk ${hintsUsed} dari 3`}>
@@ -108,7 +108,7 @@ export function FieldNotes({ def, task, className = '' }: { def: CaseDefinition;
             {entries.map((e, i) => (
               <li key={e.id} className={i === 0 ? '' : 'opacity-70'}>
                 <p className="label">{e.head}</p>
-                <p className={`leading-relaxed ${i === 0 ? 'text-[15px]' : 'text-sm'}`}><RichText text={e.text} /></p>
+                <p className={`leading-relaxed ${i === 0 ? 'text-body' : 'text-sm'}`}><RichText text={e.text} /></p>
               </li>
             ))}
           </ol>
@@ -131,7 +131,7 @@ export function FieldNotes({ def, task, className = '' }: { def: CaseDefinition;
         <div className="grid grid-cols-2 gap-2">
           {TOOLS.map((t) => <Button key={t.id} size="sm" aria-pressed={t.id === 'pickWord' ? wordMode : undefined} onClick={() => onTool(t)}>{t.label}</Button>)}
         </div>
-        <p className="text-[11px] leading-snug text-ink-500">Tersusun sebelumnya, tanpa internet, tidak pernah memberi jawaban akhir. Petunjuk baru dan penjelasan kata mengurangi bintang; sisanya gratis.</p>
+        <p className="text-tiny leading-snug text-ink-500">Tersusun sebelumnya, tanpa internet, tidak pernah memberi jawaban akhir. Petunjuk baru dan penjelasan kata mengurangi bintang; sisanya gratis.</p>
       </div>
     </section>
   )

@@ -6,7 +6,7 @@ function arabify(text: string, keyPrefix: string, strong: boolean) {
   const parts = text.split(ARABIC_RUN)
   return parts.map((p, i) =>
     i % 2 === 1 ? (
-      <span key={`${keyPrefix}${i}`} lang="ar" dir="rtl" className={`ar text-[1.2em] leading-normal ${strong ? 'font-semibold text-gold-400' : ''}`}>{p}</span>
+      <span key={`${keyPrefix}${i}`} lang="ar" dir="rtl" className={`ar ar-inline ${strong ? 'font-semibold text-gold-400' : ''}`}>{p}</span>
     ) : (
       <Fragment key={`${keyPrefix}${i}`}>{strong ? <strong className="font-semibold text-gold-300">{p}</strong> : p}</Fragment>
     ),
@@ -27,7 +27,8 @@ export function RichText({ text, className = '' }: { text: string; className?: s
   )
 }
 
-export function Ar({ children, className = '', size = 'md' }: { children: React.ReactNode; className?: string; size?: 'sm' | 'md' | 'lg' | 'xl' }) {
-  const s = size === 'sm' ? 'text-lg' : size === 'md' ? 'text-2xl' : size === 'lg' ? 'text-2xl sm:text-3xl' : 'text-3xl sm:text-5xl'
-  return <span lang="ar" dir="rtl" className={`ar ${s} ${className}`}>{children}</span>
+export type ArSize = 'xs' | 'sm' | 'cue' | 'md' | 'lg' | 'xl' | 'hero'
+/** Arabic text. Font, size, weight, line-height and (for block nodes) alignment come from the appearance preferences; add `ar-keep` to opt a node out of the alignment preference. */
+export function Ar({ children, className = '', size = 'md' }: { children: React.ReactNode; className?: string; size?: ArSize }) {
+  return <span lang="ar" dir="rtl" className={`ar ar-${size} ${className}`}>{children}</span>
 }

@@ -68,7 +68,7 @@ export function Results() {
 
             <div className="mt-6 border-l-2 border-gold-600 pl-4">
               <p className="label">Rekomendasi</p>
-              <p className="mt-0.5 text-[15px] font-medium leading-relaxed" data-testid="recommendation">{rec.text}</p>
+              <p className="mt-0.5 text-body font-medium leading-relaxed" data-testid="recommendation">{rec.text}</p>
             </div>
             {(r.firstClear && next) || isFinal ? (
               <div className="rule mt-5 flex flex-wrap items-center gap-3 pt-4 text-sm">
@@ -88,9 +88,9 @@ export function Results() {
               {vocabRows.map((v) => {
                 const total = Math.max(1, v.c + v.w)
                 return (
-                  <li key={v.k} className="grid grid-cols-[minmax(0,1fr)_72px_132px] items-center gap-3 border-b border-ink-600 py-1.5">
-                    <Ar size="sm" className="truncate text-left !leading-snug">{v.l!.ar}</Ar>
-                    <span className="flex h-1.5 bg-ink-600" aria-hidden><span className="bg-good" style={{ width: `${(v.c / total) * 100}%` }} /><span className="bg-coral" style={{ width: `${(v.w / total) * 100}%` }} /></span>
+                  <li key={v.k} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-1 border-b border-ink-600 py-1.5 sm:grid-cols-[minmax(0,1fr)_72px_auto]">
+                    <Ar size="sm" className="ar-keep min-w-0 text-left !leading-snug">{v.l!.ar}</Ar>
+                    <span className="order-3 col-span-2 flex h-1.5 bg-ink-600 sm:order-none sm:col-span-1" aria-hidden><span className="bg-good" style={{ width: `${(v.c / total) * 100}%` }} /><span className="bg-coral" style={{ width: `${(v.w / total) * 100}%` }} /></span>
                     <span className="whitespace-nowrap text-right font-mono text-xs"><span className="text-good">{v.c} benar</span> · <span className={v.w ? 'text-bad' : 'text-cream-400'}>{v.w} salah</span></span>
                   </li>
                 )

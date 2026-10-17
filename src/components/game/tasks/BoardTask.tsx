@@ -56,10 +56,10 @@ function SortBoard({ task, def, solved, onSolved }: TaskProps<T>) {
     <div>
       <TaskPrompt instruction={task.instruction} />
       <div className="grid gap-3">
-        {renderZone('tray', 'Baki bukti — seret kartu atau ketuk lalu ketuk zona', 'border-ink-500 bg-ink-800/50')}
+        {renderZone('tray', 'Baki bukti — seret kartu atau ketuk lalu ketuk zona', 'border-ink-500 bg-ink-800/soft')}
         <div className="grid gap-3 md:grid-cols-2">
-          {renderZone('important', 'Penting', 'border-good/60 border-t-2 border-t-good bg-ink-800/40')}
-          {renderZone('discard', 'Singkirkan', 'border-bad/60 border-t-2 border-t-bad bg-ink-800/40')}
+          {renderZone('important', 'Penting', 'border-good/60 border-t-2 border-t-good bg-ink-800/soft-sm')}
+          {renderZone('discard', 'Singkirkan', 'border-bad/60 border-t-2 border-t-bad bg-ink-800/soft-sm')}
         </div>
       </div>
       <div className="mt-3 flex flex-col gap-3">

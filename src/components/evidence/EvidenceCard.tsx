@@ -30,7 +30,7 @@ export function EvidenceCard({ clue, index, note, selected, muted, pinned, onPin
         <span className="mb-0.5 flex items-center justify-between gap-2">
           <span className="docno">E-{pad2(index)}</span>
           <span className="flex items-center gap-1.5">
-            {badge && <span className="stamp stamp-amber !px-1.5 !py-0 !text-[10px]">{badge}</span>}
+            {badge && <span className="stamp stamp-amber !px-1.5 !py-0 !text-micro">{badge}</span>}
             {clue.entity && <EntityGlyph kind={clue.entity} size={22} />}
           </span>
         </span>
@@ -39,7 +39,7 @@ export function EvidenceCard({ clue, index, note, selected, muted, pinned, onPin
       </Tag>
       {onPin && (
         <button onClick={onPin} aria-pressed={pinned} aria-label={pinned ? 'Lepas sematan' : 'Sematkan bukti kunci'}
-          className={`tap absolute -right-2 -top-2 grid h-9 w-9 place-items-center rounded-lg border ${pinned ? 'border-gold-400 bg-gold-500 text-ink-900' : 'border-ink-500 bg-ink-800 text-cream-200'}`}>
+          className={`tap absolute -right-2 -top-2 grid h-9 w-9 place-items-center rounded-lg border ${pinned ? 'border-gold-400 bg-gold-500 text-on-accent' : 'border-ink-500 bg-ink-800 text-cream-200'}`}>
           {pinned ? <Pin size={16} /> : <PinOff size={16} />}
         </button>
       )}

@@ -6,7 +6,7 @@ export const str = (x: unknown, d = ''): string => (typeof x === 'string' ? x : 
 const bool = (x: unknown, d = false): boolean => (typeof x === 'boolean' ? x : d)
 
 export function defaultSettings(): Settings {
-  return { reduceMotion: false, demoUnlock: false }
+  return { demoUnlock: false }
 }
 export function emptyState(): PersistedState {
   return { version: 1, activePlayerId: null, players: {}, settings: defaultSettings() }
@@ -70,6 +70,6 @@ export function sanitizeState(raw: unknown): PersistedState {
   }
   const active = str(raw.activePlayerId)
   state.activePlayerId = active && state.players[active] ? active : null
-  if (isObj(raw.settings)) state.settings = { reduceMotion: bool(raw.settings.reduceMotion), demoUnlock: bool(raw.settings.demoUnlock) }
+  if (isObj(raw.settings)) state.settings = { demoUnlock: bool(raw.settings.demoUnlock) }
   return state
 }

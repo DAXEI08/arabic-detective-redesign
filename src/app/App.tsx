@@ -2,7 +2,7 @@ import { MotionConfig } from 'framer-motion'
 import { useEffect } from 'react'
 import { BrowserRouter, Navigate, Route, Routes, useLocation } from 'react-router-dom'
 import { Toasts } from '../components/common/Toasts'
-import { usePlayerStore } from '../stores/playerStore'
+import { useApplyAppearance, useMotion } from '../theme/useAppearance'
 import { startAutoSync } from '../services/cloud/supabase'
 import { ErrorBoundary } from './ErrorBoundary'
 import { RequirePlayer } from './guards'
@@ -24,11 +24,11 @@ function ScrollTop() {
 }
 
 export function App() {
-  const reduce = usePlayerStore((s) => s.settings.reduceMotion)
-  useEffect(() => { document.documentElement.classList.toggle('reduce-motion', reduce) }, [reduce])
+  useApplyAppearance()
+  const motion = useMotion()
   useEffect(() => startAutoSync(), []) // flush queued scores on startup / when online; listeners removed on unmount
   return (
-    <MotionConfig reducedMotion={reduce ? 'always' : 'user'}>
+    <MotionConfig reducedMotion={motion.framer}>
       <ErrorBoundary>
       <BrowserRouter>
         <ScrollTop />

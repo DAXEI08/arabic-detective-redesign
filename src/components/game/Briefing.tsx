@@ -16,7 +16,7 @@ export function Briefing({ def, onStart, onBack }: { def: CaseDefinition; onStar
         </div>
         <Ar size="xl" className="mt-4 block text-left leading-tight">{def.titleAr}</Ar>
         <h2 className="text-2xl font-bold tracking-tight">{def.titleId}</h2>
-        <p className="rule mt-5 max-w-prose pt-4 text-[15px] leading-relaxed text-ink-800">{def.story}</p>
+        <p className="rule mt-5 max-w-prose pt-4 text-body leading-relaxed text-ink-800">{def.story}</p>
         <dl className="rule mt-6 grid max-w-prose grid-cols-2 gap-4 pt-4 text-sm">
           <div><dt className="label">Level</dt><dd className="font-semibold">{def.learningLevel}</dd></div>
           <div><dt className="label">Mekanik</dt><dd className="font-semibold">{def.mechanic}</dd></div>

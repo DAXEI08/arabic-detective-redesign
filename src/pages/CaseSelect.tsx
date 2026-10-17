@@ -42,7 +42,7 @@ export function CaseSelect() {
       <TopBar right={
         <nav className="flex items-center text-xs" aria-label="Menu">
           {[['/achievements', 'Pencapaian'], ['/teacher', 'Mode Guru'], ['/settings', 'Pengaturan']].map(([to, label]) => (
-            <Link key={to} className={`tap items-center whitespace-nowrap px-2 font-mono text-[11px] uppercase tracking-[.08em] text-cream-300 hover:text-cream-100 sm:px-3 sm:text-xs sm:tracking-[.1em] ${to === '/teacher' ? 'hidden sm:inline-flex' : 'inline-flex'}`} to={to}>{label}</Link>
+            <Link key={to} className={`tap items-center whitespace-nowrap px-2 font-mono text-tiny uppercase tracking-[.08em] text-cream-300 hover:text-cream-100 sm:px-3 sm:text-xs sm:tracking-[.1em] ${to === '/teacher' ? 'hidden sm:inline-flex' : 'inline-flex'}`} to={to}>{label}</Link>
           ))}
         </nav>} />
       <main className="mx-auto grid max-w-page gap-6 px-4 py-6 lg:grid-cols-[300px_minmax(0,1fr)] lg:gap-10 lg:px-8 lg:py-8 xl:grid-cols-[340px_minmax(0,1fr)]">

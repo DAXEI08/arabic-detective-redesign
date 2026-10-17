@@ -59,7 +59,7 @@ export function CaseRunner({ def, onFinish, onRestart }: Props) {
           <ol className="hidden items-center gap-1 sm:flex" role="progressbar" aria-valuemin={0} aria-valuemax={def.tasks.length} aria-valuenow={idx + (solved ? 1 : 0)} aria-label="Kemajuan kasus">
             {def.tasks.map((t, i) => {
               const done = i < idx || (i === idx && solved)
-              return <li key={t.id} className={`grid h-6 w-7 place-items-center border font-mono text-[11px] ${done ? 'border-gold-500 bg-gold-500 text-ink-900' : i === idx ? 'border-gold-500 text-gold-400' : 'border-ink-500 text-ink-400'}`}>{pad2(i + 1)}</li>
+              return <li key={t.id} className={`grid h-6 w-7 place-items-center border font-mono text-tiny ${done ? 'border-gold-500 bg-gold-500 text-on-accent' : i === idx ? 'border-gold-500 text-gold-400' : 'border-ink-500 text-ink-400'}`}>{pad2(i + 1)}</li>
             })}
           </ol>
           <span className="docno hidden md:inline" title="XP kasus ini">{session.xp} XP</span>
@@ -82,7 +82,7 @@ export function CaseRunner({ def, onFinish, onRestart }: Props) {
             <p className="font-semibold">{def.titleId}</p>
             <div className="rule mt-3 pt-3">
               <p className="label">Tujuan</p>
-              <ul className="mt-1 list-disc space-y-1 pl-4 text-[13px] leading-snug text-ink-800">{def.objectives.slice(0, 3).map((o) => <li key={o}>{o}</li>)}</ul>
+              <ul className="mt-1 list-disc space-y-1 pl-4 text-small leading-snug text-ink-800">{def.objectives.slice(0, 3).map((o) => <li key={o}>{o}</li>)}</ul>
             </div>
           </div>
 
@@ -91,10 +91,10 @@ export function CaseRunner({ def, onFinish, onRestart }: Props) {
               const done = Boolean(session.taskStats[t.id]?.done)
               const cur = i === idx
               return (
-                <li key={t.id} className={`flex items-baseline gap-2 border-b border-ink-600 py-1.5 text-[13px] ${cur ? 'text-cream-100' : done ? 'text-cream-300' : 'text-ink-400'}`} aria-current={cur ? 'step' : undefined}>
-                  <span className={`font-mono text-[11px] ${cur ? 'text-gold-400' : ''}`}>{pad2(i + 1)}</span>
+                <li key={t.id} className={`flex items-baseline gap-2 border-b border-ink-600 py-1.5 text-small ${cur ? 'text-cream-100' : done ? 'text-cream-300' : 'text-ink-400'}`} aria-current={cur ? 'step' : undefined}>
+                  <span className={`font-mono text-tiny ${cur ? 'text-gold-400' : ''}`}>{pad2(i + 1)}</span>
                   <span className="flex-1 truncate">{t.titleId}</span>
-                  {done && <span className="stamp stamp-green !px-1 !py-0 !text-[9px]">OK</span>}
+                  {done && <span className="stamp stamp-green !px-1 !py-0 !text-nano">OK</span>}
                 </li>
               )
             })}
@@ -102,7 +102,7 @@ export function CaseRunner({ def, onFinish, onRestart }: Props) {
 
           <div className="mt-4 border-l-2 border-gold-500 pl-3">
             <p className="label !text-gold-400">Perintah · tugas {pad2(idx + 1)}</p>
-            <p className="mt-1 text-[15px] leading-relaxed"><RichText text={task.instruction} /></p>
+            <p className="mt-1 text-body leading-relaxed"><RichText text={task.instruction} /></p>
           </div>
 
           {vocab.length > 0 && (
@@ -151,7 +151,7 @@ export function CaseRunner({ def, onFinish, onRestart }: Props) {
               <div className="flex items-center gap-3">
                 <span className="stamp stamp-green stamp-in">Terverifikasi</span>
                 <span className="hidden sm:block">
-                  <span lang="ar" dir="rtl" className="ar text-xl leading-none text-good">أَحْسَنْتَ!</span>
+                  <Ar size="cue" className="leading-none text-good">أَحْسَنْتَ!</Ar>
                   {gain && <motion.span key={gain.key} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="ml-3 font-mono text-sm text-gold-400">+{gain.xp} XP{gain.xp > 100 && <span className="ml-1 text-xs text-cream-300">(tanpa petunjuk)</span>}</motion.span>}
                 </span>
                 {gain && <span className="font-mono text-sm text-gold-400 sm:hidden">+{gain.xp} XP</span>}

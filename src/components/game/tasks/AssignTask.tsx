@@ -70,7 +70,7 @@ export function AssignTask({ task, def, solved, onSolved }: TaskProps<T>) {
                   <Ar size="md" className="flex-1 text-cream-100">{z.ar}</Ar>
                   {occ && (
                     <DragItem label={`Tokoh ${NAME_DEFINITE[occ]} di ${z.ar}`} disabled={solved} onActivate={() => setSel(sel === occ ? null : occ)} selected={sel === occ}
-                      onDropOn={(id) => drop(occ, id)} className="tap flex items-center gap-1 rounded-lg bg-ink-950/60 px-2">
+                      onDropOn={(id) => drop(occ, id)} className="tap flex items-center gap-1 rounded-lg bg-ink-950/glass px-2">
                       <EntityGlyph kind={occ} size={40} />
                     </DragItem>
                   )}
@@ -78,7 +78,7 @@ export function AssignTask({ task, def, solved, onSolved }: TaskProps<T>) {
               )
             })}
           </div>
-          <div data-drop="tray" className="mt-3 flex min-h-[72px] flex-wrap items-center gap-2 rounded-xl border border-dashed border-ink-500 bg-ink-800/50 p-2">
+          <div data-drop="tray" className="mt-3 flex min-h-[72px] flex-wrap items-center gap-2 rounded-xl border border-dashed border-ink-500 bg-ink-800/soft p-2">
             {tray.length === 0 && <span className="px-2 text-xs text-cream-400">Semua tokoh sudah ditempatkan.</span>}
             {tray.map((i) => (
               <DragItem key={i} label={`Tokoh ${NAME_DEFINITE[i]}`} selected={sel === i} disabled={solved} onActivate={() => setSel(sel === i ? null : i)}

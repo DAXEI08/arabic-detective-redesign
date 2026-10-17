@@ -93,7 +93,7 @@ export function PlacementTask({ task, def, solved, onSolved }: TaskProps<T>) {
               )
             }} />
           <div data-drop="tray" onClick={() => { if (selected && placed[selected]) { unplace(selected); setSelected(null) } }}
-            className="mt-3 flex min-h-[72px] flex-wrap items-center gap-2 rounded-xl border border-dashed border-ink-500 bg-ink-800/50 p-2" aria-label="Benda yang belum diletakkan">
+            className="mt-3 flex min-h-[72px] flex-wrap items-center gap-2 rounded-xl border border-dashed border-ink-500 bg-ink-800/soft p-2" aria-label="Benda yang belum diletakkan">
             {tray.length === 0 && <span className="px-2 text-xs text-cream-400">Semua benda sudah di peta. Ketuk benda di peta lalu ketuk kotak lain untuk memindahkan.</span>}
             {tray.map((m) => (
               <DragItem key={m} label={`Benda ${NAME_DEFINITE[m]}`} selected={selected === m} disabled={solved}

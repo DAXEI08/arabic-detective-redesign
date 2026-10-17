@@ -14,7 +14,7 @@ export class ErrorBoundary extends Component<{ children: ReactNode }, { failed: 
           <h1 className="text-xl font-bold">Terjadi kesalahan tampilan</h1>
           <p className="mt-2 text-sm text-cream-300">Progres kamu aman tersimpan di perangkat. Muat ulang halaman untuk melanjutkan.</p>
           <div className="mt-4 flex flex-col gap-2">
-            <button className="tap rounded-lg bg-gold-500 px-4 font-semibold text-ink-900" onClick={() => window.location.reload()}>Muat ulang</button>
+            <button className="tap rounded-lg bg-gold-500 px-4 font-semibold text-on-accent" onClick={() => window.location.reload()}>Muat ulang</button>
             <a className="tap grid place-items-center rounded-lg border border-ink-500 px-4 text-sm" href="/">Ke beranda</a>
           </div>
         </div>

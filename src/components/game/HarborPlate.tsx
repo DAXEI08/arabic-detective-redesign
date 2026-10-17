@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { useMotion } from '../../theme/useAppearance'
 
 const PINS: [number, number][] = [[150, 232], [338, 342], [470, 452], [612, 246], [698, 338]]
 const ROUTE = 'M150 232 C 230 300, 280 336, 338 342 S 440 420, 470 452 S 590 330, 612 246 S 690 300, 698 338'
@@ -6,6 +7,7 @@ const ROUTE = 'M150 232 C 230 300, 280 336, 338 342 S 440 420, 470 452 S 590 330
 /** Survey plate of the port. Pure illustration (aria-hidden): grid refs, quay, sheds, container yard, vessel and the five case locations. */
 export function HarborPlate({ className = '' }: { className?: string }) {
   const cols = ['A', 'B', 'C', 'D', 'E']
+  const { decorative } = useMotion() // the route draw-in is decoration, not state
   return (
     <svg viewBox="0 0 800 560" className={className} aria-hidden role="presentation" fontFamily="'IBM Plex Mono', ui-monospace, monospace">
       <defs>
@@ -40,7 +42,7 @@ export function HarborPlate({ className = '' }: { className?: string }) {
       <rect x="196" y="428" width="64" height="26" fill="#1E3249" stroke="#A3B4C6" strokeOpacity=".5" />
       <text x="290" y="448" fontSize="10" letterSpacing="3" fill="#A3B4C6">KAPAL</text>
       {/* route + case pins */}
-      <motion.path d={ROUTE} fill="none" stroke="#E3B04B" strokeWidth="2" strokeDasharray="7 6" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ duration: 1.6, ease: 'easeInOut' }} />
+      <motion.path d={ROUTE} fill="none" stroke="#E3B04B" strokeWidth="2" strokeDasharray="7 6" initial={decorative ? { pathLength: 0 } : false} animate={{ pathLength: 1 }} transition={{ duration: 1.6, ease: 'easeInOut' }} />
       {PINS.map(([x, y], i) => (
         <g key={i}>
           <circle cx={x} cy={y} r="13" fill="#E3B04B" stroke="#0A121C" strokeWidth="3" />

@@ -44,7 +44,7 @@ function Detail({ a, all }: { a: TeacherAttempt; all: TeacherAttempt[] }) {
       {d.vocab.filter((v) => v.w > 0).length === 0 ? <p className="mt-1 text-xs text-cream-300">Tidak ada kesalahan kosakata pada percobaan ini.</p> : (
         <ul className="mt-2 grid gap-1.5">
           {d.vocab.filter((v) => v.w > 0).slice(0, 5).map((v) => (
-            <li key={v.id} className="flex items-center justify-between rounded-lg bg-ink-700/60 px-3 py-1.5"><Ar size="sm">{v.ar}</Ar><span className="text-xs"><span className="text-good">{v.c} benar</span> · <span className="text-bad">{v.w} salah</span></span></li>
+            <li key={v.id} className="flex items-center justify-between rounded-lg bg-ink-700/glass px-3 py-1.5"><Ar size="sm">{v.ar}</Ar><span className="text-xs"><span className="text-good">{v.c} benar</span> · <span className="text-bad">{v.w} salah</span></span></li>
           ))}
         </ul>
       )}
@@ -52,7 +52,7 @@ function Detail({ a, all }: { a: TeacherAttempt; all: TeacherAttempt[] }) {
         <>
           <h3 className="mt-5 text-sm font-semibold">Tugas yang butuh bantuan</h3>
           <ul className="mt-2 grid gap-1 text-xs">
-            {d.issues.slice(0, 6).map((t) => <li key={t.taskId} className="flex justify-between rounded bg-ink-700/40 px-3 py-1"><span>{t.taskId}</span><span>{t.mistakes} salah · {t.hints} hint</span></li>)}
+            {d.issues.slice(0, 6).map((t) => <li key={t.taskId} className="flex justify-between rounded bg-ink-700/soft-sm px-3 py-1"><span>{t.taskId}</span><span>{t.mistakes} salah · {t.hints} hint</span></li>)}
           </ul>
         </>
       )}
